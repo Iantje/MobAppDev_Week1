@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/constraintLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/quizTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:fontFamily="sans-serif-light"
+        android:text="@string/conjunction_and"
+        android:textSize="36sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/checkButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="@string/check"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/questionHeader"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/QuestionOne"
+        app:layout_constraintTop_toBottomOf="@+id/quizTitle">
+
+        <TextView
+            android:id="@+id/fieldAHeader"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_weight="1"
+            android:text="@string/a"
+            android:textAlignment="center"
+            android:textSize="36sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@+id/fieldBHeader"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/quizTitle" />
+
+        <TextView
+            android:id="@+id/fieldBHeader"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_weight="1"
+            android:text="@string/b"
+            android:textAlignment="center"
+            android:textSize="36sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@+id/fieldABHeader"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/fieldAHeader"
+            app:layout_constraintTop_toBottomOf="@+id/quizTitle" />
+
+        <TextView
+            android:id="@+id/fieldABHeader"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_weight="1"
+            android:text="@string/a_b"
+            android:textAlignment="center"
+            android:textSize="36sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/fieldBHeader"
+            app:layout_constraintTop_toBottomOf="@+id/quizTitle" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/QuestionOne"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/questionTwo"
+        app:layout_constraintTop_toBottomOf="@+id/questionHeader">
+
+        <TextView
+            android:id="@+id/fieldAQuestion1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:tag="questionVar"
+            android:text="@string/questionTrue"
+            android:textAlignment="center"
+            android:textSize="30sp" />
+
+        <TextView
+            android:id="@+id/fieldBQuestion1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:tag="questionVar"
+            android:text="@string/questionTrue"
+            android:textAlignment="center"
+            android:textSize="30sp" />
+
+        <EditText
+            android:id="@+id/answerOne"
+            android:tag="answerVar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="10"
+            android:importantForAutofill="no"
+            android:inputType="textShortMessage"
+            android:singleLine="true"
+            android:textAlignment="center"
+            tools:targetApi="o" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/questionTwo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/questionThree"
+        app:layout_constraintTop_toBottomOf="@+id/QuestionOne">
+
+        <TextView
+            android:id="@+id/fieldAQuestion2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:tag="questionVar"
+            android:text="@string/questionTrue"
+            android:textAlignment="center"
+            android:textSize="30sp" />
+
+        <TextView
+            android:id="@+id/fieldBQuestion2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:tag="questionVar"
+            android:text="@string/questionFalse"
+            android:textAlignment="center"
+            android:textSize="30sp" />
+
+        <EditText
+            android:id="@+id/answerTwo"
+            android:tag="answerVar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:autofillHints=""
+            android:ems="10"
+            android:inputType="textShortMessage"
+            android:textAlignment="center"
+            tools:targetApi="o" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/questionThree"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/questionFour"
+        app:layout_constraintTop_toBottomOf="@+id/questionTwo">
+
+        <TextView
+            android:id="@+id/fieldAQuestion3"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:tag="questionVar"
+            android:text="@string/questionFalse"
+            android:textAlignment="center"
+            android:textSize="30sp" />
+
+        <TextView
+            android:id="@+id/fieldBQuestion3"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:tag="questionVar"
+            android:text="@string/questionTrue"
+            android:textAlignment="center"
+            android:textSize="30sp" />
+
+        <EditText
+            android:id="@+id/answerThree"
+            android:tag="answerVar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:ems="10"
+            android:importantForAutofill="no"
+            android:inputType="textShortMessage"
+            android:textAlignment="center"
+            tools:targetApi="o" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/questionFour"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/checkButton"
+        app:layout_constraintTop_toBottomOf="@+id/questionThree">
+
+        <TextView
+            android:id="@+id/fieldAQuestion4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:tag="questionVar"
+            android:text="@string/questionFalse"
+            android:textAlignment="center"
+            android:textSize="30sp" />
+
+        <TextView
+            android:id="@+id/fieldBQuestion4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:tag="questionVar"
+            android:text="@string/questionFalse"
+            android:textAlignment="center"
+            android:textSize="30sp" />
+
+        <EditText
+            android:id="@+id/answerFour"
+            android:tag="answerVar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="10"
+            android:importantForAutofill="no"
+            android:inputType="textShortMessage"
+            android:textAlignment="center"
+            tools:targetApi="o" />
+
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>
