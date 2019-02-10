@@ -17,8 +17,8 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    private ArrayList<TextView> questionFields;
-    private ArrayList<EditText> answerFields;
+    private TextView[] questionFields;
+    private EditText[] answerFields;
     private Button mCheckButton;
 
     private static final String TAG = "MyActivity";
@@ -36,19 +36,27 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        ViewGroup constraintLayout = findViewById(R.id.constraintLayout);
+        questionFields = new TextView[]{
+                findViewById(R.id.fieldAQuestion1), findViewById(R.id.fieldBQuestion1),
+                findViewById(R.id.fieldAQuestion2), findViewById(R.id.fieldBQuestion2),
+                findViewById(R.id.fieldAQuestion3), findViewById(R.id.fieldBQuestion3),
+                findViewById(R.id.fieldAQuestion4), findViewById(R.id.fieldBQuestion4)
+        };
 
-        questionFields = getTextViewsByTag(constraintLayout, "questionVar");
+        answerFields = new EditText[]{
+                findViewById(R.id.answerOne),
+                findViewById(R.id.answerTwo),
+                findViewById(R.id.answerThree),
+                findViewById(R.id.answerFour)
+        };
 
-        answerFields = getEditTextsByTag(constraintLayout, "answerVar");
-
-        if((float)questionFields.size() / (float)answerFields.size() != 2)
+        if((float)questionFields.length / (float)answerFields.length != 2)
         {
             Log.e(TAG, "question and answer fields don't match up (not 2:1)");
         }
 
-        for (int i = 0; i < answerFields.size(); i++) {
-            answerFields.get(i).addTextChangedListener(new TextWatcher() {
+        for (int i = 0; i < answerFields.length; i++) {
+            answerFields[i].addTextChangedListener(new TextWatcher() {
                 @Override
                 public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -69,75 +77,29 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private static ArrayList<TextView> getTextViewsByTag(ViewGroup root, String tag){
-        // Create the array list
-        ArrayList<TextView> textViews = new ArrayList<TextView>();
-
-        // Check how many children the root has
-        final int childCount = root.getChildCount();
-        // Loop through all the children
-        for (int i = 0; i < childCount; i++) {
-            // Get the child
-            final View child = root.getChildAt(i);
-            // If the child has more children
-            if (child instanceof ViewGroup) {
-                // Add all of them
-                textViews.addAll(getTextViewsByTag((ViewGroup) child, tag));
-            }
-
-            // Get tag of the child
-            final Object tagObj = child.getTag();
-            // If there is a tag, and it equals what we want, add it to our list
-            if (tagObj != null && tagObj.equals(tag) && tagObj instanceof TextView) {
-                textViews.add((TextView)child);
-            }
-
-        }
-        return textViews;
-    }
-
-    private static ArrayList<EditText> getEditTextsByTag(ViewGroup root, String tag){
-        // Create the array list
-        ArrayList<EditText> editTexts = new ArrayList<>();
-
-        // Check how many children the root has
-        final int childCount = root.getChildCount();
-        // Loop through all the children
-        for (int i = 0; i < childCount; i++) {
-            // Get the child
-            final View child = root.getChildAt(i);
-            // If the child has more children
-            if (child instanceof ViewGroup) {
-                // Add all of them
-                editTexts.addAll(getEditTextsByTag((ViewGroup) child, tag));
-            }
-
-            // Get tag of the child
-            final Object tagObj = child.getTag();
-            // If there is a tag, and it equals what we want, add it to our list
-            if (tagObj != null && tagObj.equals(tag) && tagObj instanceof EditText) {
-                editTexts.add((EditText)child);
-            }
-
-        }
-        return editTexts;
-    }
-
     private void checkAnswers() {
-        for (int i = 0; i < answerFields.size(); i++) {
+        boolean allCorrect = true;
+
+        for (int i = 0; i < answerFields.length; i++) {
             int questionPlace = i * 2;
             boolean questionAnswer = true;
 
-            if (questionFields.get(questionPlace).getText().toString().toUpperCase().equals("F") ||
-                    questionFields.get(questionPlace + 1).getText().toString().toUpperCase().equals("F")) {
+            if (questionFields[questionPlace].getText().toString().toUpperCase().equals("F") ||
+                    questionFields[questionPlace + 1].getText().toString().toUpperCase().equals("F")) {
                 questionAnswer = false;
             }
 
-            if (answerFields.get(i).getText().toString().toUpperCase().equals("T") && questionAnswer) {
-                Toast.makeText(this, getString(R.string.correct), Toast.LENGTH_LONG).show();
-            } else {
-                Toast.makeText(this, getString(R.string.incorrect), Toast.LENGTH_LONG).show();
+            if (answerFields[i].getText().toString().toUpperCase().equals("T") && !questionAnswer) {
+                allCorrect = false;
+            } else if (answerFields[i].getText().toString().toUpperCase().equals("F") && questionAnswer) {
+                allCorrect = false;
             }
+        }
+
+        if (allCorrect) {
+            Toast.makeText(this, getString(R.string.correct), Toast.LENGTH_LONG).show();
+        } else {
+            Toast.makeText(this, getString(R.string.incorrect), Toast.LENGTH_LONG).show();
         }
     }
 
