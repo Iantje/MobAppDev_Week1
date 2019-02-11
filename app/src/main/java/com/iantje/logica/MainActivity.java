@@ -1,25 +1,20 @@
 package com.iantje.logica;
 
-import android.os.Debug;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
-
 public class MainActivity extends AppCompatActivity {
 
-    private TextView[] questionFields;
-    private EditText[] answerFields;
-    private Button mCheckButton;
+    private TextView[] _questionFields;
+    private EditText[] _answerFields;
 
     private static final String TAG = "MyActivity";
 
@@ -28,35 +23,35 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mCheckButton = findViewById(R.id.checkButton);
-        mCheckButton.setOnClickListener(new View.OnClickListener() {
+        Button checkButton = findViewById(R.id.checkButton);
+        checkButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 checkAnswers();
             }
         });
 
-        questionFields = new TextView[]{
+        _questionFields = new TextView[]{
                 findViewById(R.id.fieldAQuestion1), findViewById(R.id.fieldBQuestion1),
                 findViewById(R.id.fieldAQuestion2), findViewById(R.id.fieldBQuestion2),
                 findViewById(R.id.fieldAQuestion3), findViewById(R.id.fieldBQuestion3),
                 findViewById(R.id.fieldAQuestion4), findViewById(R.id.fieldBQuestion4)
         };
 
-        answerFields = new EditText[]{
+        _answerFields = new EditText[]{
                 findViewById(R.id.answerOne),
                 findViewById(R.id.answerTwo),
                 findViewById(R.id.answerThree),
                 findViewById(R.id.answerFour)
         };
 
-        if((float)questionFields.length / (float)answerFields.length != 2)
+        if((float) _questionFields.length / (float) _answerFields.length != 2)
         {
             Log.e(TAG, "question and answer fields don't match up (not 2:1)");
         }
 
-        for (int i = 0; i < answerFields.length; i++) {
-            answerFields[i].addTextChangedListener(new TextWatcher() {
+        for (int i = 0; i < _answerFields.length; i++) {
+            _answerFields[i].addTextChangedListener(new TextWatcher() {
                 @Override
                 public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -80,18 +75,18 @@ public class MainActivity extends AppCompatActivity {
     private void checkAnswers() {
         boolean allCorrect = true;
 
-        for (int i = 0; i < answerFields.length; i++) {
+        for (int i = 0; i < _answerFields.length; i++) {
             int questionPlace = i * 2;
             boolean questionAnswer = false;
 
-            if (questionFields[questionPlace].getText().toString().toUpperCase().equals("T") &&
-                    questionFields[questionPlace + 1].getText().toString().toUpperCase().equals("T")) {
+            if (_questionFields[questionPlace].getText().toString().toUpperCase().equals("T") &&
+                    _questionFields[questionPlace + 1].getText().toString().toUpperCase().equals("T")) {
                 questionAnswer = true;
             }
 
-            if (!answerFields[i].getText().toString().toUpperCase().equals("T") && questionAnswer) {
+            if (!_answerFields[i].getText().toString().toUpperCase().equals("T") && questionAnswer) {
                 allCorrect = false;
-            } else if (!answerFields[i].getText().toString().toUpperCase().equals("F") && !questionAnswer) {
+            } else if (!_answerFields[i].getText().toString().toUpperCase().equals("F") && !questionAnswer) {
                 allCorrect = false;
             }
         }
