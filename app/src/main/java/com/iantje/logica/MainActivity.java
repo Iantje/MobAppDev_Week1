@@ -82,16 +82,16 @@ public class MainActivity extends AppCompatActivity {
 
         for (int i = 0; i < answerFields.length; i++) {
             int questionPlace = i * 2;
-            boolean questionAnswer = true;
+            boolean questionAnswer = false;
 
-            if (questionFields[questionPlace].getText().toString().toUpperCase().equals("F") ||
-                    questionFields[questionPlace + 1].getText().toString().toUpperCase().equals("F")) {
-                questionAnswer = false;
+            if (questionFields[questionPlace].getText().toString().toUpperCase().equals("T") &&
+                    questionFields[questionPlace + 1].getText().toString().toUpperCase().equals("T")) {
+                questionAnswer = true;
             }
 
-            if (answerFields[i].getText().toString().toUpperCase().equals("T") && !questionAnswer) {
+            if (!answerFields[i].getText().toString().toUpperCase().equals("T") && questionAnswer) {
                 allCorrect = false;
-            } else if (answerFields[i].getText().toString().toUpperCase().equals("F") && questionAnswer) {
+            } else if (!answerFields[i].getText().toString().toUpperCase().equals("F") && !questionAnswer) {
                 allCorrect = false;
             }
         }
